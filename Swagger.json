@@ -1,0 +1,353 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Open Api",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "https://127.0.0.1/"
+    },
+    {
+      "url": "http://127.0.0.1/"
+    }
+  ],
+  "paths": {
+    "/list/{list_id}": {
+      "get": {
+        "summary": "Liefert alle Einträge einer Todo-Liste zurück.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "list_id",
+            "in": "path",
+            "description": "ID of list",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TodoList"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "invalid list id",
+            "content": {}
+          }
+        }
+      }
+    },
+    
+    "/list_delete/{list_id}": {
+      "delete": {
+        "summary": "Löscht eine komplette Todo-Liste mit allen Einträge",
+        "description": "",
+        "parameters": [
+          {
+            "name": "list_id",
+            "in": "path",
+            "description": "ID of list",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "invalid list id",
+            "content": {}
+          }
+        }
+      }
+    }, 
+    
+    "/list/": {
+      "post": {
+        "summary": "Fügt eine neue Todo-Liste hinzu.",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TodoList"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Something gone wrong",
+            "content": {}
+          }
+        }
+      }
+    }, 
+    
+    "/list/{list_id}/entry": {
+      "post": {
+        "summary": "Fügt einen Eintrag zu einer bestehenden Todo-Liste hinzu.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "list_id",
+            "in": "path",
+            "description": "ID of list",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TodoEntry"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Something gone wrong",
+            "content": {}
+          }
+        }
+      }
+    }, 
+    
+    
+    "/list/{list_id}/entry/{entry_id}": {
+      "post": {
+        "summary": "Aktualisiert einen bestehenden Eintrag.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "list_id",
+            "in": "path",
+            "description": "ID of list",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "entry_id",
+            "in": "path",
+            "description": "ID of entry",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "invalid list id",
+            "content": {}
+          }
+        }
+      }
+    }, 
+    
+    
+    "/list/{list_id}/entry_delete/{entry_id}": {
+      "delete": {
+        "summary": "Löscht einen einzelnen Eintrag einer Todo-Liste.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "list_id",
+            "in": "path",
+            "description": "ID of list",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "entry_id",
+            "in": "path",
+            "description": "ID of entry",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "invalid list id",
+            "content": {}
+          }
+        }
+      }
+    }, 
+    
+    
+    "/users/": {
+      "get": {
+        "summary": "Liefert eine Liste aller Benutzer zurück.",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/users"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "invalid list id",
+            "content": {}
+          }
+        }
+      }
+    }, 
+    
+    
+    "/user/": {
+      "post": {
+        "summary": "Fügt einen neuen Benutzer hinzu.",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/user"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "invalid list id",
+            "content": {}
+          }
+        }
+      }
+    }, 
+    
+    "/user/{user_id}": {
+      "delete": {
+        "summary": "Löscht einen Benutzer.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "ID of list",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "invalid list id",
+            "content": {}
+          }
+        }
+      }
+    }
+  },
+    
+  "components": {
+    "schemas": {
+      "TodoList": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "entries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TodoEntry"
+            }
+          }
+        }
+      },
+      "TodoEntry": {
+        "type": "object",
+        "properties": {
+          "entry_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "users": {
+        "type": "object",
+        "properties": {
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/user"
+            }
+          }
+        }
+      },
+      "user": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
