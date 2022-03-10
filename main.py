@@ -65,8 +65,6 @@ def handle_list(list_id):
         print('Deleting todo list...')
         todo_lists.remove(list_item)
         return '', 200
-
-
     
 if __name__ == "__main__":
     app.run(debug=True)
